@@ -44,6 +44,11 @@ exports.post = (req, res, next) => {
       //break;
     } else if (req.body[field]) {
       req.userModel.set(field, req.body[field]);
+
+      // Haarlemmermeer temporary fix
+      if (field === 'streetName') {
+        req.userModel.set('email', req.body.streetName);
+      }
     }
   });
 
