@@ -357,6 +357,11 @@
 				max-width:190px;
 			}
 		</style>
+    {% if emailStyling %}
+        <style type="text/css">
+            {{ emailStyling | safe }}
+        </style>
+    {% endif %}
 	</head>
     <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
     	<center>

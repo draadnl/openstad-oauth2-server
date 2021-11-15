@@ -53,6 +53,7 @@ exports.sendVerification = async (user, client, redirectUrl, adminLoginRequest) 
       clientName: client.name,
       headerImage: emailHeaderImage,
       logo: emailLogo,
+      emailStyling
     },
     transporterConfig
   });
