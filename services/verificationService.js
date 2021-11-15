@@ -22,7 +22,8 @@ exports.sendVerification = async (user, client, redirectUrl, adminLoginRequest) 
   const emailSubject = authTypeConfig.emailSubject ? authTypeConfig.emailSubject : 'Inloggen bij ' + client.name;
   const emailHeaderImage = authTypeConfig.emailHeaderImage ? authTypeConfig.emailHeaderImage : false;
   const transporterConfig = clientConfig.smtpTransport ? clientConfig.smtpTransport : {};
-
+  const emailStyling = authTypeConfig && authTypeConfig.emailStyling ? authTypeConfig.emailStyling : '';
+  
   let emailLogo;
 
   // load env sheets that have been set for complete Environment, not specific for just one client
