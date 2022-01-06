@@ -12,6 +12,7 @@ on:
     branches:
       - master
       - development
+      - develop
       - feature/*
       - release/*
       - release
