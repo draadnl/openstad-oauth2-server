@@ -1,4 +1,6 @@
 # Changelog
+## Unreleased
+* Make the email url brute force more restrictive
 
 ## 0.19.0
 * Make the email url brute force more restrictive
