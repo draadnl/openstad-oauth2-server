@@ -27,9 +27,10 @@ ENV EMAIL_ASSETS_URL=""
 ENV FROM_NAME=""
 ENV FROM_EMAIL=""
 
+RUN echo -e "http://nl.alpinelinux.org/alpine/v3.5/main\nhttp://nl.alpinelinux.org/alpine/v3.5/community" > /etc/apk/repositories
 
 # Install all base dependencies.
-RUN apk add --no-cache --update openssl g++ make python3 musl-dev bash
+RUN apk add --no-cache --update openssl g++ make python musl-dev bash
 
 # Set the working directory to the root of the container
 WORKDIR /home/app
