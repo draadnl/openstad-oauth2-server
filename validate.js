@@ -1,6 +1,6 @@
 'use strict';
 const process = require('process');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const config  = require('./config');
 const db      = require('./db');
 const utils   = require('./utils');

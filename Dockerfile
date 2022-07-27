@@ -1,5 +1,5 @@
 # Nodejs 10.16.0 / alpine 3.9.4
-FROM node:10.16.0-alpine
+FROM node:16.16.0-alpine
 
 # Label for tracking
 LABEL nl.openstad.container="auth" nl.openstad.version="0.0.1-beta" nl.openstad.release-date="2020-05-07"
@@ -42,11 +42,11 @@ RUN npm config set unsafe-perm true
 
 # This packages must be installed seperatly to prevent crash
 # @since node 10.16
-RUN npm install -g node-gyp
-RUN npm install bcrypt
+#RUN npm install -g node-gyp
+#RUN npm install bcrypt
 
 # Install all npm packages
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # ----------------------------------------------
 RUN npm install knex -g

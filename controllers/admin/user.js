@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const User = require('../../models').User;
 const UserRole = require('../../models').UserRole
 const saltRounds = 10;

@@ -1,7 +1,7 @@
 const authType = 'UniqueCode';
 
 const passport          = require('passport');
-const bcrypt            = require('bcrypt');
+const bcrypt            = require('bcryptjs');
 const saltRounds        = 10;
 const hat               = require('hat');
 const login             = require('connect-ensure-login');
