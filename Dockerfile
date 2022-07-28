@@ -1,5 +1,5 @@
 # Nodejs 10.16.0 / alpine 3.9.4
-FROM node:16.16.0-alpine
+FROM node:16.16-alpine
 
 # Label for tracking
 LABEL nl.openstad.container="auth" nl.openstad.version="0.0.1-beta" nl.openstad.release-date="2020-05-07"
@@ -27,10 +27,17 @@ ENV EMAIL_ASSETS_URL=""
 ENV FROM_NAME=""
 ENV FROM_EMAIL=""
 
-RUN echo -e "http://nl.alpinelinux.org/alpine/v3.5/main\nhttp://nl.alpinelinux.org/alpine/v3.5/community" > /etc/apk/repositories
+#RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.6/main' >> /etc/apk/repositories
+#RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.6/community' >> /etc/apk/repositories
+RUN apk update
 
 # Install all base dependencies.
-RUN apk add --no-cache --update openssl g++ make python musl-dev bash
+RUN apk add --no-cache --update openssl g++ make python3 musl-dev bash
+#RUN apk add --no-cache --update python
+
+# Symlink python to python3
+RUN ln -s /usr/bin/python3 /usr/bin/python && \
+    ln -s /usr/bin/pip3 /usr/bin/pip
 
 # Set the working directory to the root of the container
 WORKDIR /home/app
@@ -43,7 +50,7 @@ RUN npm config set unsafe-perm true
 
 # This packages must be installed seperatly to prevent crash
 # @since node 10.16
-#RUN npm install -g node-gyp
+RUN npm install -g node-gyp
 #RUN npm install bcrypt
 
 # Install all npm packages
