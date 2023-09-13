@@ -9,7 +9,8 @@ exports.preventCiscoRequest = (req, res, next) => {
   
   // CIDRs for Cisco Umbrella
   // See https://support.umbrella.com/hc/en-us/articles/360059292052-Additional-Egress-IP-Address-Range
-  const cidrs = ['146.112.0.0/16', '155.190.0.0/16', '151.186.0.0/16'];
+  // Also adds CIDRs for 365 Defender SafeLinks scanner ~(40.90.x.x - 40.94.x.x)
+  const cidrs = ['146.112.0.0/16', '155.190.0.0/16', '151.186.0.0/16', '40.90.0.0/15', '40.92.0.0/15', '40.94.0.0/16'];
   
   // Check if IP is in cidr
   const isIpInCidr = cidrs.some(cidr => {
