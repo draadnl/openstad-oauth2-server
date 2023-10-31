@@ -39,7 +39,8 @@ exports.getUrl = getUrl;
 
 exports.invalidateTokensForUser = (userId) => {
   return new Promise((resolve, reject) => {
-    if (!userId) {
+    resolve();
+    /*if (!userId) {
       resolve();
     } else {
       LoginToken
@@ -50,7 +51,7 @@ exports.invalidateTokensForUser = (userId) => {
        )
        .then(() => { resolve(); })
        .catch(() => { resolve(); })
-     }
+     }*/
   });
 
 }
