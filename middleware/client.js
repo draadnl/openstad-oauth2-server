@@ -32,6 +32,9 @@ exports.withOne = (req, res, next) => {
     clientId = req.params.clientId;
   }
 
+  console.log( 'req.query', JSON.stringify(req.query) );
+  console.log( 'req.params', JSON.stringify(req.params) );
+
   if (clientId) {
     new Client({ clientId: clientId })
     .fetch()

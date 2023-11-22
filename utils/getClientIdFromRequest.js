@@ -9,6 +9,8 @@ module.exports = (req) => {
   if (!req) {
     return false;
   }
+
+  console.log( 'getClientFromRequest', req.body, req.query, req.params );
   
   let clientId = req.body && req.body.clientId;
   
