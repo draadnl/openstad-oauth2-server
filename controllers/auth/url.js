@@ -187,30 +187,23 @@ exports.postAuthenticate = (req, res, next) => {
                 return next(err);
             }
 
+            const redirectToAuthorisation = () => {
+                // Redirect if it succeeds to authorize screen
+                //check if allowed url will be done by authorize screen
+                const authorizeUrl = `/dialog/authorize?redirect_uri=${redirectUrl}&response_type=code&client_id=${req.client.clientId}&scope=offline`;
+                return res.redirect(authorizeUrl);
+            };
 
-            return tokenUrl.invalidateTokensForUser(user.id)
-                .then((response) => {
-                    const redirectToAuthorisation = () => {
-                        // Redirect if it succeeds to authorize screen
-                        //check if allowed url will be done by authorize screen
-                        const authorizeUrl = `/dialog/authorize?redirect_uri=${redirectUrl}&response_type=code&client_id=${req.client.clientId}&scope=offline`;
-                        return res.redirect(authorizeUrl);
-                    }
-
-                    req.brute.reset(() => {
-                        //log the succesfull login
-                        authService.logSuccessFullLogin(req)
-                            .then(() => {
-                                redirectToAuthorisation();
-                            })
-                            .catch(() => {
-                                redirectToAuthorisation();
-                            });
+            req.brute.reset(() => {
+                // log the succesfull login
+                authService.logSuccessFullLogin(req)
+                    .then(() => {
+                        redirectToAuthorisation();
+                    })
+                    .catch(() => {
+                        redirectToAuthorisation();
                     });
-                })
-                .catch((err) => {
-                    next(err);
-                });
+            });
         });
 
     })(req, res, next);
