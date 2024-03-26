@@ -194,8 +194,8 @@ exports.postAuthenticate = (req, res, next) => {
             }
 
 
-            return tokenUrl.invalidateTokensForUser(user.id)
-                .then((response) => {
+            // return tokenUrl.invalidateTokensForUser(user.id)
+            //     .then((response) => {
                     const redirectToAuthorisation = () => {
                         // Redirect if it succeeds to authorize screen
                         //check if allowed url will be done by authorize screen
@@ -213,10 +213,10 @@ exports.postAuthenticate = (req, res, next) => {
                                 redirectToAuthorisation();
                             });
                     });
-                })
-                .catch((err) => {
-                    next(err);
-                });
+                // })
+                // .catch((err) => {
+                //     next(err);
+                // });
         });
 
     })(req, res, next);

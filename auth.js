@@ -67,7 +67,7 @@ passport.use('url', new TokenStrategy({
     .then(async (token) => {
 
       if (token) {
-        await tokenUrl.invalidateTokensForUser(token.get('userId'));
+        // await tokenUrl.invalidateTokensForUser(token.get('userId'));
 
         new User({id: token.get('userId')})
           .fetch()
