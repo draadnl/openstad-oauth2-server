@@ -23,7 +23,7 @@ const bruteForce = require('../middleware/bruteForce');
 const authMw = require('../middleware/auth');
 const passwordResetMw = require('../middleware/passwordReset');
 const logMw = require('../middleware/log');
-const blocker = require('../middleware/blocker');
+// const blocker = require('../middleware/blocker');
 
 //UTILS
 const getClientIdFromRequest = require('../utils/getClientIdFromRequest');
