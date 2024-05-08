@@ -238,7 +238,7 @@ module.exports = function (app) {
     app.get('/auth/url/login/:priviligedRoute?', clientMw.setAuthType('Url'), clientMw.validate, csrfProtection, addCsrfGlobal, authUrl.login);
     app.get('/auth/url/confirmation', clientMw.setAuthType('Url'),  csrfProtection, addCsrfGlobal, authUrl.confirmation);
     app.post('/auth/url/login/:priviligedRoute?', clientMw.setAuthType('Url'), csrfProtection, emailUrlBruteForce, authUrl.postLogin);
-    app.get('/auth/url/authenticate', blocker.preventCiscoRequest, clientMw.setAuthType('Url'),  csrfProtection, addCsrfGlobal, authUrl.authenticate);
+    app.get('/auth/url/authenticate', clientMw.setAuthType('Url'),  csrfProtection, addCsrfGlobal, authUrl.authenticate);
     app.post('/auth/url/authenticate', clientMw.setAuthType('Url'), csrfProtection, emailUrlBruteForce, authUrl.postAuthenticate);
 
 
