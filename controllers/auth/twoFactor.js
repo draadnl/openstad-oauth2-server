@@ -1,4 +1,5 @@
 const twofactor = require("node-2fa");
+const QRCode = require('qrcode')
 
 const twoFactorBaseUrl = '/auth/two-factor';
 
@@ -87,9 +88,9 @@ exports.configure = async (req, res, next) => {
         let twoFactorSecret = req.userModel.get('twoFactorToken');
 
         // @todo, would be good to take this from ENV or settings somewhere. Currently however no name per installation
-        const issuer = "Openstad";
+        const issuer = process.env.ENVIRONMENT_NAME ? process.env.ENVIRONMENT_NAME : "Openstad";
         // take email, since this is always present, make sure @ char doesn't cause issues in some cases
-        const accountName = req.userModel.get('email');
+        const accountName = req.userModel.get('email') ? req.userModel.get('email') : req.userModel.get('name');
 
         if (!twoFactorSecret) {
             /**
@@ -108,7 +109,9 @@ exports.configure = async (req, res, next) => {
 
         }
 
-        const qrCode = `https://chart.googleapis.com/chart?chs=166x166&chld=L|0&cht=qr&chl=otpauth://totp/=${encodeURIComponent(issuer)}:${encodeURIComponent(accountName)}%3Fsecret=${twoFactorSecret}%26issuer=${encodeURIComponent(issuer)}`;
+        const otpAuthUrl = `otpauth://totp/${encodeURIComponent(issuer)}:%20${encodeURIComponent(accountName)}?secret=${twoFactorSecret}&issuer=${encodeURIComponent(issuer)}`;
+
+        const qrCode = await QRCode.toDataURL(otpAuthUrl);
 
         res.render('auth/two-factor/configure', {
             postUrl: twoFactorBaseUrl + '/configure',
