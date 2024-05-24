@@ -27,6 +27,8 @@ ENV EMAIL_ASSETS_URL=""
 ENV FROM_NAME=""
 ENV FROM_EMAIL=""
 
+# 2 factor QR code variable
+ENV ENVIRONMENT_NAME=""
 
 # Install all base dependencies.
 RUN apk add --no-cache --update openssl g++ make python musl-dev bash
