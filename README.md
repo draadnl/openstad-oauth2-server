@@ -38,6 +38,9 @@ EMAIL_ASSETS_URL=
 # Set the from name and email from which emails will be send (for example: password forgot & login url)
 FROM_NAME=
 FROM_EMAIL=
+
+# Set the environment name so that the QR code generator can use it
+ENVIRONMENT_NAME=
 ```
 
 #### 2. Run NPM install
