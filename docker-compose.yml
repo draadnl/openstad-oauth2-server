@@ -41,6 +41,10 @@ services:
       # Set the from name and email from which emails will be send (for example: password forgot & login url)
       FROM_NAME: "Openstad"
       FROM_EMAIL: "${FROM_EMAIL:-no-reply@localhost}"
+
+      # Set the environment name so that the QR code generator can use it
+      ENVIRONMENT_NAME: ""
+
     ports:
       - "${PORT:-2000:2000}"
       - "${PORT:-4000:4000}"
