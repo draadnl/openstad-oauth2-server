@@ -27,6 +27,9 @@ ENV EMAIL_ASSETS_URL=""
 ENV FROM_NAME=""
 ENV FROM_EMAIL=""
 
+# 2 factor QR code variable
+ENV ENVIRONMENT_NAME=""
+
 #RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.6/main' >> /etc/apk/repositories
 #RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.6/community' >> /etc/apk/repositories
 RUN apk update
