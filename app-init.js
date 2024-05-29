@@ -49,7 +49,7 @@ function getMongoDbConnectionString () {
   
   // Allow the connection string builder to be overridden by an environment variable
   if (process.env.MONGO_DB_CONNECTION_STRING) {
-    return process.env.MONGO_DB_CONNECTION_STRING.replaceAll('{database}', dbName);
+    return process.env.MONGO_DB_CONNECTION_STRING.replace('{database}', dbName);
   }
   
   const host = process.env.MONGO_DB_HOST || 'localhost';
