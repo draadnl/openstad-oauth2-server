@@ -25,7 +25,7 @@
    if (req.user) {
      res.redirect('/account');
    } else {
-     res.redirect('/login');
+     res.status(200).render('errors/500');
    }
  };
 
