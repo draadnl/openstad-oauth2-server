@@ -24,7 +24,8 @@ module.exports = {
     },
     seeds: {
       directory: __dirname + '/knex/seeds'
-    }
+    },
+    pool: { min: 0, max: 10 }
   },
   test: {
     client: 'sqlite3',
@@ -35,7 +36,8 @@ module.exports = {
     },
     seeds: {
       directory: __dirname + '/knex/seeds'
-    }
+    },
+    pool: { min: 0, max: 10 }
   },
 
   production: {
@@ -46,7 +48,8 @@ module.exports = {
     },
     seeds: {
       directory: __dirname + '/knex/seeds'
-    }
+    },
+    pool: { min: 0, max: 10 }
   }
 
 };
