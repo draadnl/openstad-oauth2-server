@@ -12,7 +12,7 @@
         </h1>
         <p class="intro">
             {% if description %}
-            {{description}}
+            {{description | safe}}
             {% else %}
             Bekijk uw inbox om in te loggen.
             Het kan enkele minuten duren voor de e-mail verschijnt.
