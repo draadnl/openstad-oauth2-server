@@ -40,9 +40,16 @@ const sessionStore = new MySQLStore({
 
 
 function getMongoDbConnectionString () {
+  
+  let dbName = 'sessions';
+  
+  if (process.env.MONGODB_PREFIX) {
+    dbName = `${process.env.MONGODB_PREFIX}${dbName}`;
+  }
+  
   // Allow the connection string builder to be overridden by an environment variable
   if (process.env.MONGO_DB_CONNECTION_STRING) {
-    return process.env.MONGO_DB_CONNECTION_STRING.replace("{database}", 'sessions');
+    return process.env.MONGO_DB_CONNECTION_STRING.replace('{database}', dbName);
   }
   
   const host = process.env.MONGO_DB_HOST || 'localhost';
