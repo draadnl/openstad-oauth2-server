@@ -39,12 +39,31 @@ const sessionStore = new MySQLStore({
 */
 
 
-const mongoCredentials = {
-  host: process.env.MONGO_DB_HOST || 'localhost',
-  port: process.env.MONGO_DB_PORT || 27017,
+function getMongoDbConnectionString () {
+  
+  let dbName = 'sessions';
+  
+  if (process.env.MONGO_DB_PREFIX) {
+    dbName = `${process.env.MONGO_DB_PREFIX}${dbName}`;
+  }
+  
+  // Allow the connection string builder to be overridden by an environment variable
+  if (process.env.MONGO_DB_CONNECTION_STRING) {
+    return process.env.MONGO_DB_CONNECTION_STRING.replace('{database}', dbName);
+  }
+  
+  const host = process.env.MONGO_DB_HOST || 'localhost';
+  const port = process.env.MONGO_DB_PORT || 27017;
+  const user = process.env.MONGO_DB_USER || '';
+  const password = process.env.MONGO_DB_PASSWORD || '';
+  const authSource = process.env.MONGO_DB_AUTHSOURCE || '';
+  
+  const useAuth = user && password;
+  
+  return `mongodb://${useAuth ? `${user}:${password}@` : ''}${host}:${port}/sessions${authSource ? `?authSource=${authSource}` : ''}`;
 }
 
-const url = 'mongodb://'+ mongoCredentials.host +':'+mongoCredentials.port+'/sessions';
+const url = getMongoDbConnectionString();
 
 const sessionStore =  new MongoStore({
     url: url,
@@ -104,15 +123,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(expressValidator());
 
-/*
 app.use((req, res, next) => {
   console.log('=====> REQUEST: ', req.originalUrl);
   console.log('=====> query: ', req.query);
+  console.log('=====> ip: ', req.headers['x-forwarded-for'] || req.socket.remoteAddress, req.ip);
   console.log('=====> body: ', req.body);
   console.log('=====> session: ', req.session);
   next();
 });
-*/
 
 // Passport configuration
 require('./auth');
